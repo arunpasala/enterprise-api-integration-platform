@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: integration
+      POSTGRES_PASSWORD: localpassword
+      POSTGRES_DB: integration
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U integration"]
+      interval: 3s
+      retries: 15
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment: &common
+      DATABASE_URL: postgresql+psycopg://integration:localpassword@db:5432/integration
+      API_KEY: ${API_KEY:-dev-local-key-change-me}
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET:-change-me-in-production}
+      PARTNER_URL: http://api:8000/mock-partner/customers
+    depends_on:
+      db:
+        condition: service_healthy
+  worker:
+    build: .
+    command: python -u -m app.worker
+    environment:
+      <<: *common
+      PARTNER_URL: http://api:8000/mock-partner/customers
+    depends_on:
+      db:
+        condition: service_healthy
+      api:
+        condition: service_started
+volumes:
+  pgdata:
