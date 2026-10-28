@@ -1,6 +1,6 @@
 # Enterprise API Integration Platform
 
-A portfolio-ready **working MVP** demonstrating REST API design, API-key authentication, transactional outbox, asynchronous delivery, retry/backoff, request idempotency, signed inbound webhooks, integration monitoring, and automated tests.
+A  **working MVP** demonstrating REST API design, API-key authentication, transactional outbox, asynchronous delivery, retry/backoff, request idempotency, signed inbound webhooks, integration monitoring, and automated tests.
 
 ## Architecture
 
