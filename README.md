@@ -114,10 +114,8 @@ This is an **educational MVP, not production-ready**. It demonstrates important 
 - This demo does not provide an actual graphical dashboard; `/api/integrations` and `/api/metrics` are JSON monitoring endpoints.
 - Add CI, load tests, multi-tenant isolation, and a real third-party sandbox integration for a stronger portfolio project.
 
-## Suggested portfolio demonstration (3 minutes)
 
-1. Show Swagger docs and create a customer.
-2. Explain how customer and outbox are committed in the same database transaction.
-3. Show pending -> delivered and demonstrate repeated idempotent requests.
+
+
 4. Simulate a partner outage and show retry status and recovery.
 5. Explain security controls and which safeguards are still needed for production.
